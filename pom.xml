@@ -15,6 +15,8 @@
 	<description>API para agendamento e envio de mensagens</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring.version>2.5.1</spring.version>
+		<lombok.version>1.18.20</lombok.version>
 		<flyway.version>7.10.0</flyway.version>
 		<postgresql.jdbc.driver>42.2.20</postgresql.jdbc.driver>
 		<database.url>jdbc:postgresql://localhost:5432/agendamento_comunicacao</database.url>
@@ -25,6 +27,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 		</dependency>
 
 		<dependency>
