@@ -1,0 +1,1 @@
+ALTER TABLE tb_log_envio_mensagem ADD COLUMN id_log SERIAL PRIMARY KEY;

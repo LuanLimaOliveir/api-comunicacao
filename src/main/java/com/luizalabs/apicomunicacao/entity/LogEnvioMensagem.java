@@ -15,6 +15,11 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class LogEnvioMensagem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_log")
+    private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "cd_agendamento")
     private Agendamento agendamento;
