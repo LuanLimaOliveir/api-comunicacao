@@ -15,6 +15,11 @@
 	<description>API para agendamento e envio de mensagens</description>
 	<properties>
 		<java.version>11</java.version>
+		<flyway.version>7.10.0</flyway.version>
+		<postgresql.jdbc.driver>42.2.20</postgresql.jdbc.driver>
+		<database.url>jdbc:postgresql://localhost:5432/agendamento_comunicacao</database.url>
+		<database.user>luizalabs</database.user>
+		<databese.password>luizalabs</databese.password>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -34,6 +39,27 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>${flyway.version}</version>
+				<configuration>
+					<sqlMigrationSeparator>__</sqlMigrationSeparator>
+					<locations>
+						<location>filesystem:src/main/resources/db/migrations</location>
+					</locations>
+					<url>${database.url}</url>
+					<user>${database.user}</user>
+					<password>${databese.password}</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>${postgresql.jdbc.driver}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
