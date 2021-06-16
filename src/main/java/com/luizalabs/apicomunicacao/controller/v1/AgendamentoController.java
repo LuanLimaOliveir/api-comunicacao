@@ -3,6 +3,9 @@ package com.luizalabs.apicomunicacao.controller.v1;
 import com.luizalabs.apicomunicacao.entity.dto.AgendamentoDTO;
 import com.luizalabs.apicomunicacao.entity.dto.LogEnvioMensagemDTO;
 import com.luizalabs.apicomunicacao.service.AgendamentoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,12 +24,19 @@ public class AgendamentoController {
 
     private final AgendamentoService agendamentoService;
 
-    @PostMapping
+    @ApiOperation(value = "Agendar o envio de comunicação", response = AgendamentoDTO.class)
+    @ApiResponses(value = { @ApiResponse(code = 201, message = ""),
+            @ApiResponse(code = 500, message = "Internal Server Error") })
+    @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public AgendamentoDTO criarAgendamento(@Valid @RequestBody AgendamentoDTO agendamentoDTO) {
         return this.agendamentoService.criarAgendamento(agendamentoDTO).toDTO();
     }
 
+    @ApiOperation(value = "Consultar situação do agendamento", response = LogEnvioMensagemDTO[].class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = ""),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error") })
     @GetMapping("{idAgendamento}")
     @ResponseStatus(HttpStatus.OK)
     public List<LogEnvioMensagemDTO> consultarAgendamento(@PathVariable Integer idAgendamento) {
@@ -41,6 +51,10 @@ public class AgendamentoController {
                 collect(Collectors.toList());
     }
 
+    @ApiOperation(value = "Excluir agendamento para envio de comunicação")
+    @ApiResponses(value = { @ApiResponse(code = 204, message = ""),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error") })
     @DeleteMapping("{idAgendamento}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirAgendamento(@PathVariable Integer idAgendamento) {
