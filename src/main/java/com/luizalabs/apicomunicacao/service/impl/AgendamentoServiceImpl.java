@@ -21,6 +21,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
     private final LogEnvioMensagemRepository logEnvioMensagemRepository;
 
     @Override
+    @Transactional
     public Agendamento criarAgendamento(AgendamentoDTO agendamentoDTO) {
         var agendamento = agendamentoDTO.toModel();
         agendamento.setDataCadastro(LocalDateTime.now());
