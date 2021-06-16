@@ -17,9 +17,8 @@ import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.core.Is.is;
@@ -114,5 +113,14 @@ public class AgendamentoControllerTest {
                 .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[1].idAgendamento", is(71)))
                 .andExpect(jsonPath("$[1].codigoStatus", is(200)));
+    }
+
+    @Test
+    public void excluirAgendamento() throws Exception {
+        this.mockMvc
+                .perform(
+                        delete("/api/v1/agendamento/{idAgendamento}", 70)
+                )
+                .andExpect(status().isNoContent());
     }
 }
