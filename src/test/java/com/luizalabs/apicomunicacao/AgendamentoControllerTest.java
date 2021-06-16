@@ -152,4 +152,15 @@ public class AgendamentoControllerTest {
                 )
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    public void excluirAgendamento_Http_Status_Not_Found() throws Exception {
+        doThrow(new NotFoundException()).when(agendamentoService).excluirAgendamento(71);
+
+        this.mockMvc
+                .perform(
+                        delete("/api/v1/agendamento/{idAgendamento}", 71)
+                )
+                .andExpect(status().isNotFound());
+    }
 }
