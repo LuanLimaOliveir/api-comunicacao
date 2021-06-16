@@ -38,24 +38,25 @@ public class AgendamentoControllerTest {
                 "}";
 
         AgendamentoDTO agendamentoDTO = AgendamentoDTO.builder()
-                .id(70)
-                .dataAgendamento(LocalDateTime.now())
-                .destinatario("luanlima.oliveir@gmail.com")
-                .mensagem("Olá Luan, bem-vindo(a) ao Gmail!")
-                .idTipoComunicacao(1)
-                .descricaoTipoComunicacao("email")
-                .build();
+                    .id(70)
+                    .dataAgendamento(LocalDateTime.now())
+                    .destinatario("luanlima.oliveir@gmail.com")
+                    .mensagem("Olá Luan, bem-vindo(a) ao Gmail!")
+                    .idTipoComunicacao(1)
+                    .descricaoTipoComunicacao("email")
+                    .build();
 
         when(agendamentoService.criarAgendamento(any())).thenReturn(agendamentoDTO.toModel());
 
         this.mockMvc
-                .perform(post("/api/v1/agendamento")
+                .perform(
+                        post("/api/v1/agendamento")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
+                        .content(json)
+                )
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(70)))
                 .andExpect(jsonPath("$.destinatario", is("luanlima.oliveir@gmail.com")))
                 .andExpect(jsonPath("$.idTipoComunicacao", is(1)));
     }
-
 }
