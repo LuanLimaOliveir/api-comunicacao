@@ -104,7 +104,7 @@ public class AgendamentoControllerTest {
 
         this.mockMvc
                 .perform(
-                        get("/api/v1/agendamento/{idAgendamento}", 71)
+                        get("/api/v1/agendamento/{idAgendamento}/situacao", 71)
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[*]", hasSize(2)))
@@ -148,7 +148,7 @@ public class AgendamentoControllerTest {
 
         this.mockMvc
                 .perform(
-                        get("/api/v1/agendamento/{idAgendamento}", 71)
+                        get("/api/v1/agendamento/{idAgendamento}/situacao", 71)
                 )
                 .andExpect(status().isNotFound());
     }

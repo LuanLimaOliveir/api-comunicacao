@@ -38,7 +38,7 @@ public class AgendamentoController {
     @ApiResponses(value = { @ApiResponse(code = 200, message = ""),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error") })
-    @GetMapping("{idAgendamento}")
+    @GetMapping("{idAgendamento}/situacao")
     @ResponseStatus(HttpStatus.OK)
     public List<LogEnvioMensagemDTO> consultarAgendamento(@PathVariable Integer idAgendamento) {
         return this.agendamentoService.consultarAgendamento(idAgendamento).stream().
