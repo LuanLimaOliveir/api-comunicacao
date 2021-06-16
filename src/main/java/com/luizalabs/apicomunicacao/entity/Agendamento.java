@@ -1,5 +1,6 @@
 package com.luizalabs.apicomunicacao.entity;
 
+import com.luizalabs.apicomunicacao.entity.dto.AgendamentoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,4 +36,15 @@ public class Agendamento {
     @ManyToOne
     @JoinColumn(name = "cd_tipo_comunicacao")
     private TipoComunicacao tipoComunicacao;
+
+    public AgendamentoDTO toDTO() {
+        return AgendamentoDTO.builder()
+                .id(this.id)
+                .dataAgendamento(this.dataAgendamento)
+                .destinatario(this.destinatario)
+                .mensagem(this.mensagem)
+                .idTipoComunicacao(this.tipoComunicacao.getId())
+                .descricaoTipoComunicacao(this.tipoComunicacao.getDescricao())
+                .build();
+    }
 }
