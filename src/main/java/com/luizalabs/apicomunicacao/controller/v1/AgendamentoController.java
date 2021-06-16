@@ -1,4 +1,4 @@
-package com.luizalabs.apicomunicacao.controller;
+package com.luizalabs.apicomunicacao.controller.v1;
 
 import com.luizalabs.apicomunicacao.entity.dto.AgendamentoDTO;
 import com.luizalabs.apicomunicacao.entity.dto.LogEnvioMensagemDTO;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/agendamento")
+@RequestMapping("/api/v1/agendamento")
 @RequiredArgsConstructor
 public class AgendamentoController {
 
