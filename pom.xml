@@ -22,6 +22,7 @@
 		<database.url>jdbc:postgresql://localhost:5432/agendamento_comunicacao</database.url>
 		<database.user>luizalabs</database.user>
 		<databese.password>luizalabs</databese.password>
+		<jackson.datatype.version>2.12.3</jackson.datatype.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -39,6 +40,12 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.jdbc.driver}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>${jackson.datatype.version}</version>
 		</dependency>
 
 		<dependency>
