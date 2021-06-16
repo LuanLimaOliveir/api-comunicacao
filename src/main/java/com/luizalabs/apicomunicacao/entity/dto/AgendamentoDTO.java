@@ -3,15 +3,15 @@ package com.luizalabs.apicomunicacao.entity.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luizalabs.apicomunicacao.entity.Agendamento;
 import com.luizalabs.apicomunicacao.entity.TipoComunicacao;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class AgendamentoDTO {
     private Integer id;
