@@ -123,4 +123,21 @@ public class AgendamentoControllerTest {
                 )
                 .andExpect(status().isNoContent());
     }
+
+    @Test
+    public void criarAgendamento_Validar_Campos_Obrigatorios() throws Exception {
+        String json = "{" +
+                "\"dataAgendamento\": \"2021-06-16 17:33:00\"," +
+                "\"mensagem\": \"Olá Luan, bem-vindo(a) ao Gmail!\"," +
+                "\"idTipoComunicacao\": 1" +
+                "}";
+
+        this.mockMvc
+                .perform(
+                        post("/api/v1/agendamento")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(json)
+                )
+                .andExpect(status().isBadRequest());
+    }
 }
