@@ -9,4 +9,5 @@ import java.util.List;
 public interface AgendamentoService {
     Agendamento criarAgendamento(AgendamentoDTO agendamentoDTO);
     List<LogEnvioMensagem> consultarAgendamento(Integer idAgendamento);
+    void excluirAgendamento(Integer idAgendamento);
 }

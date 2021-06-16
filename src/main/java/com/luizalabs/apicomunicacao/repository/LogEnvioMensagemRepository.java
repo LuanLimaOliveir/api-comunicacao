@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface LogEnvioMensagemRepository extends JpaRepository<LogEnvioMensagem, Integer> {
     List<LogEnvioMensagem> findAllByAgendamento_Id(Integer idAgendamento);
+    void deleteAllByAgendamento_Id(Integer idAgendamento);
 }
