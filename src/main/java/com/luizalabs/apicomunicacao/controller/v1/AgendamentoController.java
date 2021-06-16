@@ -22,7 +22,7 @@ public class AgendamentoController {
     private final AgendamentoService agendamentoService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public AgendamentoDTO criarAgendamento(@Valid @RequestBody AgendamentoDTO agendamentoDTO) {
         return this.agendamentoService.criarAgendamento(agendamentoDTO).toDTO();
     }
