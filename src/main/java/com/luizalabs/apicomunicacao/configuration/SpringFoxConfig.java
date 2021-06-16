@@ -25,6 +25,7 @@ public class SpringFoxConfig extends WebMvcConfigurationSupport {
                 .apis(RequestHandlerSelectors.basePackage("com.luizalabs.apicomunicacao.controller.v1"))
                 .paths(PathSelectors.any())
                 .build()
+                .useDefaultResponseMessages(false)
                 .apiInfo(this.getApiInfo());
     }
 
