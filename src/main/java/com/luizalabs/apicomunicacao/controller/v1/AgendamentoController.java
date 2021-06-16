@@ -71,4 +71,10 @@ public class AgendamentoController {
 
         return errorsConstraintViolation;
     }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(RuntimeException.class)
+    public String handleException(RuntimeException exception) {
+        return "Internal Server Error";
+    }
 }
