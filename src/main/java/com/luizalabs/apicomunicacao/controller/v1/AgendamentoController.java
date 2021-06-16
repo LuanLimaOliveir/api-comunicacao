@@ -2,6 +2,7 @@ package com.luizalabs.apicomunicacao.controller.v1;
 
 import com.luizalabs.apicomunicacao.entity.dto.AgendamentoDTO;
 import com.luizalabs.apicomunicacao.entity.dto.LogEnvioMensagemDTO;
+import com.luizalabs.apicomunicacao.expection.NotFoundException;
 import com.luizalabs.apicomunicacao.service.AgendamentoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -70,6 +71,12 @@ public class AgendamentoController {
                 forEach( e -> errorsConstraintViolation.put(e.getField(), e.getDefaultMessage()));
 
         return errorsConstraintViolation;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public String handleException(NotFoundException exception) {
+        return "Not Found";
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

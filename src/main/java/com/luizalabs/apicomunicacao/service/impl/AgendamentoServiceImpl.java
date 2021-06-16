@@ -3,6 +3,7 @@ package com.luizalabs.apicomunicacao.service.impl;
 import com.luizalabs.apicomunicacao.entity.Agendamento;
 import com.luizalabs.apicomunicacao.entity.LogEnvioMensagem;
 import com.luizalabs.apicomunicacao.entity.dto.AgendamentoDTO;
+import com.luizalabs.apicomunicacao.expection.NotFoundException;
 import com.luizalabs.apicomunicacao.repository.AgendamentoRepository;
 import com.luizalabs.apicomunicacao.repository.LogEnvioMensagemRepository;
 import com.luizalabs.apicomunicacao.service.AgendamentoService;
@@ -31,12 +32,22 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 
     @Override
     public List<LogEnvioMensagem> consultarAgendamento(Integer idAgendamento) {
-        return this.logEnvioMensagemRepository.findAllByAgendamento_Id(idAgendamento);
+        var logs = this.logEnvioMensagemRepository.findAllByAgendamento_Id(idAgendamento);
+
+        if (logs.size() == 0) {
+            throw new NotFoundException();
+        }
+
+        return logs;
     }
 
     @Override
     @Transactional
     public void excluirAgendamento(Integer idAgendamento) {
+        if (!this.agendamentoRepository.existsById(idAgendamento)) {
+            throw new NotFoundException();
+        }
+
         this.logEnvioMensagemRepository.deleteAllByAgendamento_Id(idAgendamento);
         this.agendamentoRepository.deleteById(idAgendamento);
     }
