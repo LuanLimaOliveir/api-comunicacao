@@ -65,6 +65,7 @@ public class AgendamentoController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
+        exception.printStackTrace();
         var errorsConstraintViolation = new HashMap<String, String>();
 
         exception.getFieldErrors().stream().
@@ -76,12 +77,14 @@ public class AgendamentoController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public String handleException(NotFoundException exception) {
+        exception.printStackTrace();
         return "Not Found";
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
     public String handleException(RuntimeException exception) {
+        exception.printStackTrace();
         return "Internal Server Error";
     }
 }
