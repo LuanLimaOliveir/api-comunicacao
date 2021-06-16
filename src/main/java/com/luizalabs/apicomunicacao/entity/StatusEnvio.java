@@ -15,7 +15,6 @@ import javax.persistence.*;
 @Builder
 public class StatusEnvio {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_status_envio")
     private Integer id;
 

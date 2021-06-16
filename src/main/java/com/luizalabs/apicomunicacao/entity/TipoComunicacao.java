@@ -15,7 +15,6 @@ import javax.persistence.*;
 @Builder
 public class TipoComunicacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_comunicacao")
     private Integer id;
 
