@@ -5,9 +5,13 @@ import com.luizalabs.apicomunicacao.entity.dto.LogEnvioMensagemDTO;
 import com.luizalabs.apicomunicacao.service.AgendamentoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,7 +23,7 @@ public class AgendamentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public AgendamentoDTO criarAgendamento(@RequestBody AgendamentoDTO agendamentoDTO) {
+    public AgendamentoDTO criarAgendamento(@Valid @RequestBody AgendamentoDTO agendamentoDTO) {
         return this.agendamentoService.criarAgendamento(agendamentoDTO).toDTO();
     }
 
@@ -41,5 +45,16 @@ public class AgendamentoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirAgendamento(@PathVariable Integer idAgendamento) {
         this.agendamentoService.excluirAgendamento(idAgendamento);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
+        var errorsConstraintViolation = new HashMap<String, String>();
+
+        exception.getFieldErrors().stream().
+                forEach( e -> errorsConstraintViolation.put(e.getField(), e.getDefaultMessage()));
+
+        return errorsConstraintViolation;
     }
 }

@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,10 +15,14 @@ import java.time.LocalDateTime;
 @Builder
 public class AgendamentoDTO {
     private Integer id;
+    @NotNull(message = "Data de agendamento é obrigátorio")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataAgendamento;
+    @NotNull(message = "Destinatário é obrigátorio")
     private String destinatario;
+    @NotNull(message = "Mensagem é obrigátorio")
     private String mensagem;
+    @NotNull(message = "ID do tipo de comunicação é obrigátorio")
     private Integer idTipoComunicacao;
     private String descricaoTipoComunicacao;
 
