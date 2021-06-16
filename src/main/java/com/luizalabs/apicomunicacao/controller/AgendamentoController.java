@@ -36,4 +36,10 @@ public class AgendamentoController {
                         build()).
                 collect(Collectors.toList());
     }
+
+    @DeleteMapping("{idAgendamento}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluirAgendamento(@PathVariable Integer idAgendamento) {
+        this.agendamentoService.excluirAgendamento(idAgendamento);
+    }
 }
