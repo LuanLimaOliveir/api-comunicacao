@@ -4,6 +4,7 @@ import com.luizalabs.apicomunicacao.controller.v1.AgendamentoController;
 import com.luizalabs.apicomunicacao.entity.LogEnvioMensagem;
 import com.luizalabs.apicomunicacao.entity.StatusEnvio;
 import com.luizalabs.apicomunicacao.entity.dto.AgendamentoDTO;
+import com.luizalabs.apicomunicacao.expection.NotFoundException;
 import com.luizalabs.apicomunicacao.service.AgendamentoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,5 +140,16 @@ public class AgendamentoControllerTest {
                                 .content(json)
                 )
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void consultarAgendamento_Http_Status_Not_Found() throws Exception {
+        when(agendamentoService.consultarAgendamento(71)).thenThrow(new NotFoundException());
+
+        this.mockMvc
+                .perform(
+                        get("/api/v1/agendamento/{idAgendamento}", 71)
+                )
+                .andExpect(status().isNotFound());
     }
 }
