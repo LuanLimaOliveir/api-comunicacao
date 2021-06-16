@@ -1,19 +1,23 @@
 package com.luizalabs.apicomunicacao.service.impl;
 
 import com.luizalabs.apicomunicacao.entity.Agendamento;
+import com.luizalabs.apicomunicacao.entity.LogEnvioMensagem;
 import com.luizalabs.apicomunicacao.entity.dto.AgendamentoDTO;
 import com.luizalabs.apicomunicacao.repository.AgendamentoRepository;
+import com.luizalabs.apicomunicacao.repository.LogEnvioMensagemRepository;
 import com.luizalabs.apicomunicacao.service.AgendamentoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class AgendamentoServiceImpl implements AgendamentoService {
 
     private final AgendamentoRepository agendamentoRepository;
+    private final LogEnvioMensagemRepository logEnvioMensagemRepository;
 
     @Override
     public Agendamento criarAgendamento(AgendamentoDTO agendamentoDTO) {
@@ -21,5 +25,10 @@ public class AgendamentoServiceImpl implements AgendamentoService {
         agendamento.setDataCadastro(LocalDateTime.now());
 
         return this.agendamentoRepository.save(agendamento);
+    }
+
+    @Override
+    public List<LogEnvioMensagem> consultarAgendamento(Integer idAgendamento) {
+        return this.logEnvioMensagemRepository.findAllByAgendamento_Id(idAgendamento);
     }
 }
