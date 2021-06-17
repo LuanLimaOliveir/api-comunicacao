@@ -42,7 +42,7 @@ public class SpringFoxConfig extends WebMvcConfigurationSupport {
         return new ApiInfo(
                 "API comunicação",
                 "Serviço direcionado ao agendamento de envio de comunicação",
-                "1.0.0",
+                "0.0.1-SNAPSHOT",
                 null,
                 "luanlima.oliveir@gmail.com",
                 null,
