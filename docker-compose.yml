@@ -1,0 +1,41 @@
+version: '3'
+
+volumes:
+  db-data:
+
+services:
+  database:
+    container_name: PostgreSQL
+    image: postgres:alpine
+    volumes:
+      - db-data:/pgdata
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: agendamento_comunicacao
+      POSTGRES_USER: luizalabs
+      POSTGRES_PASSWORD: luizalabs
+      PGDATA: /pgdata
+
+  flyway:
+    container_name: Flyway
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://database:5432/agendamento_comunicacao -schemas=public -user=luizalabs -password=luizalabs -connectRetries=15 migrate
+    volumes:
+      - ./src/main/resources/db/migrations:/flyway/sql
+    depends_on:
+      - database
+
+  apicomunicacao:
+    container_name: API
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/agendamento_comunicacao
+        SPRING_DATASOURCE_USERNAME: luizalabs
+        SPRING_DATASOURCE_PASSWORD: luizalabs
+    depends_on:
+      - database
